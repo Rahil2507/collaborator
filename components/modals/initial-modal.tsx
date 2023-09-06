@@ -53,15 +53,16 @@ export const InitialModal = () => {
     <Dialog open>
       <DialogContent className="bg-white text-black p-0 overflow-hidden">
         <DialogHeader className="pt-8 px-6">
-          <DialogTitle className="text-2xl text-center font-bold">Customize your server</DialogTitle>
-          <DialogDescription className="text-center text-zinc-500">Give your server a personality with a name and an image. You can always change it later.</DialogDescription>
+          <DialogTitle className="text-2xl text-center font-bold">Server</DialogTitle>
+          <DialogDescription className="text-center text-zinc-500">Either join with an invite link or create a new server right now. </DialogDescription>
         </DialogHeader>
         <Form {...form} >
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-            <div className="space-y-8 px-6">
+            <div className="space-y-8 px-6 mt-6">
               <div className="flex items-center justify-center text-center">
                 <FormField control={form.control} name="imageUrl" render={({field}) => (
                   <FormItem>
+                    <FormLabel className="uppercase text-xs font-bold text-zinc-500 dark:text-secondary/70">Add Image</FormLabel>
                     <FormControl>
                       <FileUpload endpoint="serverImage" value={field.value} onChange={field.onChange}/>
                     </FormControl>
