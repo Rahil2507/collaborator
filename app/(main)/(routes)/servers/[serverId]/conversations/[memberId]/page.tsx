@@ -44,10 +44,12 @@ const MemberIdPage = async ({params, searchParams}: MemberIdPageProps) => {
 
   const otherMember = memberOne.profileId === profile.id ? memberTwo : memberOne
 
+  const token = conversation.id + profile.id
+
   return ( 
     <div className="bg-white dark:bg-[#313338] flex flex-col h-full">
       <ChatHeader imageUrl={otherMember.profile.imageUrl} name={otherMember.profile.name} serverId={params.serverId} type="conversation" />
-      {searchParams.video && (<MediaRoom chatId={conversation.id} video={true} audio={true} />)}
+      {searchParams.video && (<MediaRoom chatId={token} video={true} audio={true} />)}
       {!searchParams.video && (
         <>
           <ChatMessages name={otherMember.profile.name} member={currentMember} chatId={conversation.id} apiUrl="/api/direct-messages" socketUrl="/api/socket/direct-messages" socketQuery={{conversationId: conversation.id}} paramKey="conversationId" paramValue={conversation.id} type="conversation" />
