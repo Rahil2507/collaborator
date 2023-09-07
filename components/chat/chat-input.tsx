@@ -5,13 +5,14 @@ import axios from "axios";
 import qs from "query-string";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Plus } from "lucide-react";
+import { Plus, Webhook } from "lucide-react";
 import { useRouter } from "next/navigation";
 
 import { Form, FormControl, FormField, FormItem } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { useModal } from "@/hooks/use-modal-store";
 import { EmojiPicker } from "@/components/emoji-picker";
+import { PageLoding } from "../page-loading";
 
 interface ChatInputProps {
   apiUrl: string;
@@ -52,6 +53,7 @@ export const ChatInput = ({ apiUrl, query, name, type }: ChatInputProps) => {
   }
 
   return (
+    <>
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)}>
         <FormField
@@ -65,6 +67,7 @@ export const ChatInput = ({ apiUrl, query, name, type }: ChatInputProps) => {
                     <Plus className="text-white dark:text-[#313338]" />
                   </button>
                   <Input disabled={isLoading} {...field} placeholder={`Message ${type === "conversation" ? name : "#" + name}`} className="px-14 py-6 bg-zinc-200/90 dark:bg-zinc-700/75 border-none border-0 focus-visible:ring-0 focus-visible:ring-offset-0 text-zinc-600 dark:text-zinc-200" />
+                  {isLoading && <Webhook className="absolute inset-0 mx-auto my-auto h-8 w-8 md:h-12 md:w-12 text-zinc-600 animate-spin" />}
                   <div className="absolute top-7 right-8">
                     <EmojiPicker onChange={(emoji: string) => field.onChange(`${field.value}${emoji}`)} />
                   </div>
@@ -75,5 +78,6 @@ export const ChatInput = ({ apiUrl, query, name, type }: ChatInputProps) => {
         />
       </form>
     </Form>
+    </>
   )
 }

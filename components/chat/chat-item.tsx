@@ -19,6 +19,7 @@ import { ActionTooltip } from "@/components/action-tooltip"
 import { Form, FormControl, FormField, FormItem } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
+import { ChatTranslation } from "./chat-translations"
 
 
 interface ChatItemProps {
@@ -142,9 +143,10 @@ export const ChatItem = ({id, content, member, timestamp, fileUrl, deleted, curr
           )}
           {!fileUrl && !isEditing && (
             <p className={cn("text-sm text-zinc-600 dark:text-zinc-300", deleted && "italic text-zinc-500 dark:text-zinc-400 text-xs mt-1")}>
-              {content}
+              <ChatTranslation content={content} />
+
               {isUpdated && !deleted && (
-                <span className="text-[10px] mx-2 text-zinc-500">edited</span>
+                <span className="text-[10px] text-zinc-500">edited</span>
               )}
             </p>
           )}

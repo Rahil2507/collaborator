@@ -1,4 +1,5 @@
 import { NextPage, GetServerSideProps } from 'next';
+import { useRouter } from 'next/router';
 import React from 'react';
 
 interface ErrorPageProps {
@@ -6,6 +7,7 @@ interface ErrorPageProps {
 }
 
 const ErrorPage: NextPage<ErrorPageProps> = ({ statusCode }) => {
+  const router = useRouter();
   let errorMessage = 'An error occurred';
 
   if (statusCode === 404) {
@@ -14,19 +16,22 @@ const ErrorPage: NextPage<ErrorPageProps> = ({ statusCode }) => {
     errorMessage = 'Internal server error';
   }
 
+  const handleRefresh = () => {
+    router.reload();
+  };
+
   return (
     <div>
       <h1>{errorMessage}</h1>
+      <div>
+      <button onClick={handleRefresh}>Refresh</button>
+    </div>
     </div>
   );
 };
 
 export const getServerSideProps: GetServerSideProps<ErrorPageProps> = async ({ res }) => {
   try {
-    // Simulate an error condition, e.g., throw new Error('Something went wrong');
-    // You can replace this with your error handling logic.
-    
-    // If no error occurred, set the statusCode to 200 (OK)
     const statusCode = 200;
 
     return { props: { statusCode } };

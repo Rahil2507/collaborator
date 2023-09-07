@@ -8,6 +8,7 @@ import { ThemeProvider } from '@/components/providers/theme-provider'
 import { ModalProvider } from '@/components/providers/modal-provider'
 import { SocketProvider } from '@/components/providers/socket-provider'
 import { QueryProvider } from '@/components/providers/query-provider'
+import { PageLoding } from '@/components/page-loading'
 
 
 const font = Open_Sans({ subsets: ['latin'] })
@@ -25,12 +26,16 @@ export default function RootLayout({
   return (
     <ClerkProvider>
       <html lang="en" suppressHydrationWarning >
+        <head>
+          <link rel="icon" href="/logo.svg" sizes="any" />
+        </head>
         <body className={cn(font.className, "bg-white dark:bg-[#313338]")}>
           <ThemeProvider attribute='class' defaultTheme='dark' enableSystem={false} storageKey='radiant-theme'>
             <SocketProvider>
               <ModalProvider />
                 <QueryProvider>
                   {children}
+                  {/* <PageLoding /> */}
                 </QueryProvider>
             </SocketProvider>
           </ThemeProvider>
