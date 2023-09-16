@@ -9,7 +9,7 @@ import { useModal } from "@/hooks/use-modal-store"
 
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
 import { CommandDialog, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from "@/components/ui/command";
-import { UserPlus, Users } from "lucide-react"
+import { Github, UserPlus, Users } from "lucide-react"
 import Image from "next/image"
 
 
@@ -66,7 +66,10 @@ export const CodeUser = ({serverId}: CodeUserProps) => {
           <CommandDialog open={open} onOpenChange={setOpen}>
             <CommandInput placeholder="Search all Github Users" />
             <CommandList className="px-6 my-4">
-              <CommandEmpty>No Results found</CommandEmpty>
+              {/* <CommandEmpty>No Results found</CommandEmpty> */}
+              {users.length <= 1 && <CommandItem>
+                <span>No users found. Please add some.</span>
+              </CommandItem>}
               {users.map((user) => {
                 return (
                   <CommandItem onSelect={() => {setSelectedUser(user); setOpen(false)}} key={user.id}>
@@ -94,8 +97,14 @@ export const CodeUser = ({serverId}: CodeUserProps) => {
             {selectedUser?.content.blog && <span className="py-1 text-xs text-zinc-400  flex"><p className="text-zinc-300 font-semibold w-16">Blog: </p> {selectedUser?.content.blog}</span>}
             {selectedUser?.content.location && <span className="py-1 text-xs text-zinc-400  flex"><p className="text-zinc-300 font-semibold w-16">Location: </p>{selectedUser?.content.location}</span>}
             {selectedUser?.content.bio && <span className="py-1 text-xs text-zinc-400 flex"><p className="text-zinc-300 font-semibold w-16">Bio: </p><p className="max-w-[200px] md:max-w-[300px]">{selectedUser?.content.bio}</p></span>}
-
+            <div className="w-full flex justify-center mt-5">
+            <button onClick={() => onOpen("chooseUser")}  className="group px-2 py-3 rounded-md flex items-center justify-center gap-x-2 w-48 h-16 mb-1">
+              <Github className="h-5 w-5 text-zinc-400" />
+              <p className="line-clamp-1 font-semibold text-md text-zinc-500  dark:text-zinc-400 ">Go to repo</p>
+            </button>
+        </div>
           </div>}
+          
       </div>
     </div>
   )
