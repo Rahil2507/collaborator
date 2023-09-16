@@ -80,3 +80,12 @@ body,
     @apply bg-background text-foreground;
   }
 }
+
+.custom-scrollbar::-webkit-scrollbar {
+  height: 8px !important;
+  width: 6px; 
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background-color: #ffffff3b;
+}

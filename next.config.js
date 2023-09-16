@@ -11,6 +11,7 @@ const nextConfig = {
     domains: [
       "utfs.io",
       "uploadthing.com",
+      "avatars.githubusercontent.com"
     ]
   }
 }

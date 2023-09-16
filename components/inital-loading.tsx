@@ -1,8 +1,8 @@
-import { Loader2, Webhook } from "lucide-react";
+import { Webhook } from "lucide-react";
 
 export function InitialLoding() {
   return (
-    <div className="h-full w-full flex flex-col md:flex-row items-center justify-center">
+    <div className="h-full w-full flex max-md:flex-col flex-row items-center justify-center">
         <div className="mx-10 mb-20 ">
           <p className="text-zinc-600 text-md">Wlecome to</p>
           <span className="flex flex-col">

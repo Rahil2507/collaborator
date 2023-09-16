@@ -12,6 +12,8 @@ import { ServerSearch } from "./server-search"
 import { ServerSection } from "./server-section"
 import { ServerChannel } from "./server-channel"
 import { ServerMember } from "./server-member"
+import { Button } from "../ui/button"
+import { ServerCode } from "./server-code"
 
 interface ServerSiderbarProps {
   serverId: string
@@ -70,42 +72,10 @@ export const ServerSiderbar = async ({serverId}: ServerSiderbarProps) => {
       <ScrollArea className="flex-1 px-3">
         <div className="mt-2">
           <ServerSearch data={[
-            {
-              label: "Text Channels",
-              type: "channel",
-              data: textChannels?.map(channel => ({
-                id: channel.id,
-                name: channel.name,
-                icon: iconMap[channel.type],
-              }))
-            },
-            {
-              label: "Voice Channels",
-              type: "channel",
-              data: audioChannels?.map(channel => ({
-                id: channel.id,
-                name: channel.name,
-                icon: iconMap[channel.type],
-              }))
-            },
-            {
-              label: "Video Channels",
-              type: "channel",
-              data: videoChannels?.map(channel => ({
-                id: channel.id,
-                name: channel.name,
-                icon: iconMap[channel.type],
-              }))
-            },
-            {
-              label: "Members",
-              type: "member",
-              data: members?.map(member => ({
-                id: member.id,
-                name: member.profile.name,
-                icon: roleIconMap[member.role],
-              }))
-            },
+            { label: "Text Channels", type: "channel", data: textChannels?.map(channel => ({ id: channel.id, name: channel.name, icon: iconMap[channel.type], })) },
+            { label: "Voice Channels", type: "channel", data: audioChannels?.map(channel => ({ id: channel.id, name: channel.name, icon: iconMap[channel.type], })) },
+            { label: "Video Channels", type: "channel", data: videoChannels?.map(channel => ({ id: channel.id, name: channel.name, icon: iconMap[channel.type], })) },
+            { label: "Members", type: "member", data: members?.map(member => ({ id: member.id, name: member.profile.name, icon: roleIconMap[member.role], })) },
           ]}/>
         </div>
         <Separator className="bg-zinc-200 dark:bg-zinc-700 rounded-md my-2"/>
@@ -113,9 +83,7 @@ export const ServerSiderbar = async ({serverId}: ServerSiderbarProps) => {
           <div className="mb-2">
             <ServerSection sectionType="channels" channelType={ChannelType.TEXT} role={role} label="Text Channels" />
             <div className="space-y-[2px]">
-            {textChannels.map(channel => (
-              <ServerChannel key={channel.id} channel={channel} server={server} role={role} />
-            ))}
+            {textChannels.map(channel => ( <ServerChannel key={channel.id} channel={channel} server={server} role={role} /> ))}
             </div>
           </div>
         )}
@@ -123,9 +91,7 @@ export const ServerSiderbar = async ({serverId}: ServerSiderbarProps) => {
           <div className="mb-2">
             <ServerSection sectionType="channels" channelType={ChannelType.AUDIO} role={role} label="Voice Channels" />
             <div className="space-y-[2px]">
-            {audioChannels.map(audio => (
-              <ServerChannel key={audio.id} channel={audio} server={server} role={role} />
-            ))}
+            {audioChannels.map(audio => ( <ServerChannel key={audio.id} channel={audio} server={server} role={role} /> ))}
             </div>
           </div>
         )}
@@ -133,9 +99,7 @@ export const ServerSiderbar = async ({serverId}: ServerSiderbarProps) => {
           <div className="mb-2">
             <ServerSection sectionType="channels" channelType={ChannelType.VIDEO} role={role} label="Video Channels" />
             <div className="space-y-[2px]">
-            {videoChannels.map(video => (
-              <ServerChannel key={video.id} channel={video} server={server} role={role} />
-            ))}
+            {videoChannels.map(video => ( <ServerChannel key={video.id} channel={video} server={server} role={role} /> ))}
             </div>
           </div>
         )}
@@ -143,13 +107,12 @@ export const ServerSiderbar = async ({serverId}: ServerSiderbarProps) => {
           <div className="mb-2">
             <ServerSection sectionType="members" role={role} label="Members" server={server}/>
             <div className="space-y-[2px]">
-            {members.map(member => (
-              <ServerMember key={member.id} member={member} server={server} />
-            ))}
+            {members.map(member => ( <ServerMember key={member.id} member={member} server={server} /> ))}
             </div>
           </div>
         )}
       </ScrollArea>
+      <ServerCode />
     </div>
   )
 }

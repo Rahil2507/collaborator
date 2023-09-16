@@ -3,7 +3,7 @@
 import { GetTranslationLanguages, UseTextTranslate } from "@/hooks/use-text-translate"
 import { Languages } from "lucide-react";
 import { useEffect, useState } from "react"
-import { CommandDialog, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from "@/components/ui/command";
+import { CommandDialog, CommandEmpty, CommandInput, CommandItem, CommandList } from "@/components/ui/command";
 
 interface ChatTranslationProps {
   content: string

@@ -37,6 +37,7 @@ model Server {
 
   members  Member[]
   channels Channel[]
+  githubs Github[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -154,4 +155,19 @@ model DirectMessage {
 
     @@index([memberId])    
     @@index([conversationId])    
+}
+
+model Github {
+  id   String      @id @default(uuid())
+  name String
+
+  content Json
+
+  server   Server @relation(fields: [serverId], references: [id], onDelete: Cascade)
+  serverId String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([serverId])
 }

@@ -64,7 +64,7 @@ export const ChatMessages = ({name , member , chatId , apiUrl , socketUrl , sock
   }
 
   return (
-    <div ref={chatRef} className="flex-1 flex flex-col py-4 overflow-y-auto">
+    <div ref={chatRef} className="flex-1 flex flex-col py-4 overflow-y-auto custom-scrollbar">
       {!hasNextPage && <div className="flex-1"/>}
         {!hasNextPage && <ChatWelcome type={type} name={name} />}
         {hasNextPage && (

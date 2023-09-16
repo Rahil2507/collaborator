@@ -17,7 +17,7 @@ const ErrorPage: NextPage<ErrorPageProps> = ({ statusCode }) => {
   }
 
   const handleRefresh = () => {
-    router.reload();
+    router.push("/")
   };
 
   return (
