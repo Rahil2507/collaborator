@@ -1,4 +1,4 @@
-const API_KEY = 'AIzaSyDR4rcTwTqpWB81QPx9-PVtVcu6ALoB2uw';
+const API_KEY = process.env.GOOGLE_API_KEY
 
 interface ChatTranslationProps {
   text: string
