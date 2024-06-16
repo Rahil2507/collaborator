@@ -112,7 +112,13 @@ export const ChatItem = ({id, content, member, timestamp, fileUrl, deleted, curr
   const canDeleteMessage = !deleted && (isAdmin || isModerator || isOwner)
   const canEditMessage = !deleted && isOwner && !fileUrl
   const isPDF = fileType === "pdf" && fileUrl
-  const isImage = !isPDF && fileUrl
+  const isCode = fileType === "code" && fileUrl
+  const isImage = !isPDF && !isCode && fileUrl
+
+  if (isCode) {
+    const container = document.getElementById("container");
+    if (container) container.innerHTML = content
+  }
 
   return (
     <div className="relative group flex items-center hover:bg-black/5 p-4 transition w-full">
@@ -130,6 +136,12 @@ export const ChatItem = ({id, content, member, timestamp, fileUrl, deleted, curr
             </div>
             <span onClick={onMemberClick} className="text-xs text-zinc-500 dark:text-zinc-400">{timestamp}</span>
           </div>
+          {isCode && (
+            <div className='w-full md:w-96 bg-black m-5 p-5 pt-10 rounded-lg'>
+              <div id='container' className='text-xs md:text-[15px]'>
+              </div>
+          </div>
+          )}
           {isImage && (
             <a href={fileUrl} target="_blank" rel="noopener noreferrer" className="relative aspect-square rounded-md mt-2 overflow-hidden border flex items-center bg-secondary h-48 w-48">
               <Image src={fileUrl} alt={content} fill className="object-cover" />

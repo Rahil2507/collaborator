@@ -46,3 +46,25 @@ export async function POST(req: Request) {
     return new NextResponse("Internal Error", { status: 500 });
   }
 }
+export async function GET(req: Request) {
+  try {
+    const { searchParams } = new URL(req.url)
+    const serverId = searchParams.get("serverId")
+
+    if (!serverId) return new NextResponse("Server ID Missing", { status: 400 });
+
+    const channel = await db.channel.findFirst({
+      where: {
+          serverId: serverId,
+          name: 'general'
+      }
+    });
+    
+
+    return NextResponse.json(channel);
+
+  } catch (error) {
+    console.log("[CHANNELS_CREATE]", error);
+    return new NextResponse("Internal Error", { status: 500 });
+  }
+}
